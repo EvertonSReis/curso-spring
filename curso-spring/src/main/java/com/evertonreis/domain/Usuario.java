@@ -6,23 +6,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "usuario")
 public class Usuario {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Column(length = 75, nullable = false)
     private String name;
+    @Column(length = 75, nullable = false, unique = true)
     private String email;
+    @Column(length = 100, nullable = false)
     private String senha;
-    private List<Request> request = new ArrayList<>();
-    private List<RequestStage> stages = new ArrayList<>();
+    @Column(length = 20, nullable = false)
+    @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToMany(mappedBy = "usuario")
+    private List<Request> request = new ArrayList<>();
+    @OneToMany(mappedBy = "usuario")
+    private List<Stage> stages = new ArrayList<>();
 }
