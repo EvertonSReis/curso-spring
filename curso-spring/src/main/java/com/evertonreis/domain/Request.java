@@ -29,7 +29,7 @@ public class Request implements Serializable {
     @Column(columnDefinition = "text")
     private String descição;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.DATE)
     private Date dataCriacao;
 
