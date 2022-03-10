@@ -19,19 +19,19 @@ public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 75, nullable = false)
-    private String name;
-    @Column(length = 75, nullable = false, unique = true)
+    @Column(length = 75)
+    private String nome;
+    @Column(length = 75)
     private String email;
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String senha;
-    @Column(length = 20, nullable = false)
+    @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "user")
     private List<Request> request = new ArrayList<>();
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "user")
     private List<Stage> stages = new ArrayList<>();
 }

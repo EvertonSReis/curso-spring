@@ -18,7 +18,7 @@ public class Stage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(columnDefinition = "text")
@@ -33,11 +33,11 @@ public class Stage implements Serializable {
     private RequestStage stage;
 
     @ManyToOne
-    @JoinColumn(name = "id_request", nullable = false)
+    @JoinColumn(name = "request_id", nullable = false)
     private Request request;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario user;
 
 }

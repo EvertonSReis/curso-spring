@@ -20,7 +20,7 @@ public class Request implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 75, nullable = false)
@@ -38,8 +38,8 @@ public class Request implements Serializable {
     private RequestStage stage;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario user;
 
     @OneToMany(mappedBy = "request")
     private List<Stage> stages = new ArrayList<>();

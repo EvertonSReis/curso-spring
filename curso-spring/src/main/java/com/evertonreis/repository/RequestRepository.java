@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
-    public List<Request> findAllByIdUsuario(Long id);
+    public List<Request> findAllByUserId(Long id);
 
     @Query("UPDATE request SET stage = ?2 WHERE id = ?1")
     public Request updateStatus(Long id, RequestStage stage);
