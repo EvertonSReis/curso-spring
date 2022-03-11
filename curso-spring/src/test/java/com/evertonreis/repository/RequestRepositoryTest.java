@@ -62,8 +62,8 @@ public class RequestRepositoryTest {
     }
 
     @Test
-    public void listByUserIdTest(){
-        List<Request> requests = repository.findAllByUserId(1L);
+    public void listByUsuarioIdTest(){
+        List<Request> requests = repository.findAllByUsuarioId(1L);
         assertThat(requests.size()).isEqualTo(1);
     }
 

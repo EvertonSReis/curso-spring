@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
-    public List<Request> findAllByUserId(Long id);
+    public List<Request> findAllByUsuarioId(Long id);
 
     @Transactional(readOnly = false)
     @Modifying
