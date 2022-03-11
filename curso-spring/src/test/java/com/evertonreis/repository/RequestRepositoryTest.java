@@ -25,7 +25,7 @@ public class RequestRepositoryTest {
     @Autowired RequestRepository repository;
 
     @Test
-    public void Asave(){
+    public void AsaveTest(){
         Usuario usuario = new Usuario();
         usuario.setId(1L);
 
