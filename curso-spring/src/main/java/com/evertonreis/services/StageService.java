@@ -34,7 +34,7 @@ public class StageService {
     }
 
     public Stage getById(Long id){
-        Optional<Stage> obj  = repository.findById();
+        Optional<Stage> obj  = repository.findById(id);
         return obj.get();
     }
 
