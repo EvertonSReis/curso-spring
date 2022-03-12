@@ -1,7 +1,9 @@
 package com.evertonreis.resource;
 
+import com.evertonreis.domain.Request;
 import com.evertonreis.domain.Usuario;
 import com.evertonreis.dto.UserLoginDto;
+import com.evertonreis.services.RequestService;
 import com.evertonreis.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,10 +14,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/usuarios")
-public class UsuarioSource {
+public class UsuarioResource {
 
     @Autowired
     private UsuarioService service;
+    private RequestService requestService;
 
     @PostMapping
     public ResponseEntity<Usuario> save(@RequestBody Usuario usuario){
@@ -45,5 +48,11 @@ public class UsuarioSource {
     public ResponseEntity<Usuario> login(@RequestBody UserLoginDto usuario){
         Usuario loggedUsuario = service.login(usuario.getEmail(), usuario.getSenha());
         return ResponseEntity.ok(loggedUsuario);
+    }
+
+    @GetMapping("/{id}/requests")
+    public ResponseEntity<List<Request>> listAllRequestById(@PathVariable(name = "id") Long id){
+        List<Request> requests = requestService.listAllByUsuarioId(id);
+        return ResponseEntity.ok(requests);
     }
 }
