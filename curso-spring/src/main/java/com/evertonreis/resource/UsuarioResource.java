@@ -55,4 +55,6 @@ public class UsuarioResource {
         List<Request> requests = requestService.listAllByUsuarioId(id);
         return ResponseEntity.ok(requests);
     }
+
+
 }

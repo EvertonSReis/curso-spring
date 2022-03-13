@@ -1,7 +1,9 @@
 package com.evertonreis.resource;
 
 import com.evertonreis.domain.Request;
+import com.evertonreis.domain.Stage;
 import com.evertonreis.services.RequestService;
+import com.evertonreis.services.StageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ public class RequestResource {
 
     @Autowired
     private RequestService service;
+    @Autowired
+    private StageService stageService;
 
     @PostMapping
     public ResponseEntity<Request> save(@RequestBody Request request){
@@ -39,6 +43,12 @@ public class RequestResource {
     @GetMapping
     public ResponseEntity<List<Request>> listByRequest(){
         List<Request> obj = service.listByRequest();
+        return ResponseEntity.ok(obj);
+    }
+
+    @GetMapping("/{id}/stages")
+    public ResponseEntity<List<Stage>> listAllStageById(@PathVariable(name = "id") Long id){
+        List<Stage> obj = stageService.listAllByStageId(id);
         return ResponseEntity.ok(obj);
     }
 }
