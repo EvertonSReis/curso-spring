@@ -1,14 +1,18 @@
 package com.evertonreis.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter @Setter
+@Data
 public class UserLoginDto {
+
+    @Email(message = "Invalid email address!")
     private String email;
+
+    @NotBlank
     private String senha;
 }

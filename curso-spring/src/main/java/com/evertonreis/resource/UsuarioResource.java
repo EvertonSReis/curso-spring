@@ -44,17 +44,20 @@ public class UsuarioResource {
         return ResponseEntity.ok(usuarios);
     }
 
-    @PostMapping("//login")
+    @PostMapping("/login")
     public ResponseEntity<Usuario> login(@RequestBody UserLoginDto usuario){
         Usuario loggedUsuario = service.login(usuario.getEmail(), usuario.getSenha());
         return ResponseEntity.ok(loggedUsuario);
     }
 
     @GetMapping("/{id}/requests")
-    public ResponseEntity<List<Request>> listAllRequestById(@PathVariable(name = "id") Long id){
-        List<Request> requests = requestService.listAllByUsuarioId(id);
-        return ResponseEntity.ok(requests);
+    public ResponseEntity<List<Request>> listAllRequestsById(@PathVariable(name = "id") Long id){
+        List<Request> obj = requestService.listAllByUserId(id);
+        return ResponseEntity.ok(obj);
     }
 
-
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable(name = "id") Long id){
+        service.delete(id);
+    }
 }

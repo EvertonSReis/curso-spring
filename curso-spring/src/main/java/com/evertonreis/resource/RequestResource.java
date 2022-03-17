@@ -2,6 +2,7 @@ package com.evertonreis.resource;
 
 import com.evertonreis.domain.Request;
 import com.evertonreis.domain.Stage;
+import com.evertonreis.domain.Usuario;
 import com.evertonreis.services.RequestService;
 import com.evertonreis.services.StageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "requests")
+@RequestMapping(value = "/requests")
 public class RequestResource {
 
     @Autowired

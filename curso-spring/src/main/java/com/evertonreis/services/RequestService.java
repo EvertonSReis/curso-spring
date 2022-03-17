@@ -1,6 +1,7 @@
 package com.evertonreis.services;
 
 import com.evertonreis.domain.Request;
+import com.evertonreis.domain.Usuario;
 import com.evertonreis.enums.RequestStage;
 import com.evertonreis.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,8 @@ public class RequestService {
         return requests;
     }
 
-    public List<Request> listAllByUsuarioId(Long usuarioId){
-        List<Request> requests = repository.findAllByUsuarioId(usuarioId);
+    public List<Request> listAllByUserId(Long usuarioId){
+        List<Request> requests = repository.findAllByUserId(usuarioId);
         return requests;
     }
 

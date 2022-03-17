@@ -1,6 +1,7 @@
 package com.evertonreis.domain;
 
 import com.evertonreis.enums.RequestStage;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,6 +42,7 @@ public class Request implements Serializable {
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario user;
 
+    @Getter(onMethod = @__({@JsonIgnore}))
     @OneToMany(mappedBy = "request")
     private List<Stage> stages = new ArrayList<>();
 }

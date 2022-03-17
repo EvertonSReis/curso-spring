@@ -61,11 +61,11 @@ public class RequestRepositoryTest {
         assertThat(requests.size()).isEqualTo(1);
     }
 
-    @Test
-    public void listByUsuarioIdTest(){
-        List<Request> requests = repository.findAllByUsuarioId(1L);
-        assertThat(requests.size()).isEqualTo(1);
-    }
+//    @Test
+//    public void listByUsuarioIdTest(){
+//        List<Request> requests = repository.findAllByUsuarioId(1L);
+//        assertThat(requests.size()).isEqualTo(1);
+//    }
 
     @Test
     public void updateStatusTest(){

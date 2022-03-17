@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping(value = "stages")
 public class StageResource {
@@ -27,4 +29,11 @@ public class StageResource {
         Stage updateStage = service.save(stage);
         return ResponseEntity.ok(updateStage);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Stage> getById(@PathVariable(name = "id") Long id){
+        Stage obj = service.getById(id);
+        return ResponseEntity.ok(obj);
+    }
+
 }

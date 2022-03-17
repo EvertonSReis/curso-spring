@@ -2,6 +2,7 @@ package com.evertonreis.repository;
 
 import com.evertonreis.domain.Request;
 import com.evertonreis.domain.Stage;
+import com.evertonreis.domain.Usuario;
 import com.evertonreis.enums.RequestStage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,7 +15,7 @@ import java.util.List;
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
-    public List<Request> findAllByUsuarioId(Long id);
+    public List<Request> findAllByUserId(Long id);
 
     @Transactional(readOnly = false)
     @Modifying
