@@ -44,14 +44,14 @@ public class RequestResource {
     }
 
     @GetMapping
-    public ResponseEntity<PageModel<Request>> listByRequest(@RequestParam(value = "page") int page, @RequestParam(value = "size") int size){
+    public ResponseEntity<PageModel<Request>> listByRequest(@RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "size", defaultValue = "10") int size){
         PageRequestModel pr = new PageRequestModel(page, size);
         PageModel<Request> pm = service.listByRequestOnLazy(pr);
         return ResponseEntity.ok(pm);
     }
 
     @GetMapping("/{id}/stages")
-    public ResponseEntity<PageModel<Stage>> listAllStageById(@PathVariable(name = "id") Long id, @RequestParam(value = "page") int page, @RequestParam(value = "size") int size){
+    public ResponseEntity<PageModel<Stage>> listAllStageById(@PathVariable(name = "id") Long id, @RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "size", defaultValue = "10") int size){
         PageRequestModel pr = new PageRequestModel(page, size);
         PageModel<Stage> pm = stageService.listAllByStageIdOnLazyModel(id, pr);
 
