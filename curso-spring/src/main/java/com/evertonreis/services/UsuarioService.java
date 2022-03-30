@@ -1,9 +1,14 @@
 package com.evertonreis.services;
 
 import com.evertonreis.domain.Usuario;
+import com.evertonreis.model.PageModel;
+import com.evertonreis.model.PageRequestModel;
 import com.evertonreis.repository.UsuarioRepository;
 import com.evertonreis.util.HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +46,14 @@ public class UsuarioService {
     public List<Usuario> listAll(){
         List<Usuario> usuarios = repository.findAll();
         return usuarios;
+    }
+
+    public PageModel<Usuario> listAllOnLazyModel(PageRequestModel pr){
+        Pageable pageable = PageRequest.of(pr.getPage(), pr.getSize());
+        Page<Usuario> page = repository.findAll(pageable);
+
+        PageModel<Usuario> pm = new PageModel<>((int) page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());
+        return pm;
     }
 
     public Usuario login(String email, String senha){

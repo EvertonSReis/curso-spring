@@ -3,8 +3,13 @@ package com.evertonreis.services;
 import com.evertonreis.domain.Request;
 import com.evertonreis.domain.Usuario;
 import com.evertonreis.enums.RequestStage;
+import com.evertonreis.model.PageModel;
+import com.evertonreis.model.PageRequestModel;
 import com.evertonreis.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -41,9 +46,24 @@ public class RequestService {
         return requests;
     }
 
-    public List<Request> listAllByUserId(Long usuarioId){
-        List<Request> requests = repository.findAllByUserId(usuarioId);
+    public PageModel<Request> listByRequestOnLazy(PageRequestModel pr){
+        Pageable pageable = PageRequest.of(pr.getPage(), pr.getSize());
+        Page<Request> page = repository.findAll(pageable);
+
+        PageModel<Request> pm = new PageModel<>((int) page.getTotalElements(), page.getTotalPages(), page.getSize(), page.getContent());
+        return pm;
+    }
+
+    public List<Request> listAllByUsuarioId(Long id){
+        List<Request> requests = repository.findAllByUserId(id);
         return requests;
     }
 
+    public PageModel<Request> listAllByUserIdOnLazyModel(Long usuarioId, PageRequestModel pr){
+        Pageable pageable = PageRequest.of(pr.getPage(), pr.getSize());
+        Page<Request> page = repository.findAllByUserId(usuarioId, pageable);
+
+        PageModel<Request> pm = new PageModel((int) page.getTotalElements(), page.getTotalPages(), page.getSize(), page.getContent());
+        return pm;
+    }
 }

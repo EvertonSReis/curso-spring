@@ -4,6 +4,8 @@ import com.evertonreis.domain.Request;
 import com.evertonreis.domain.Stage;
 import com.evertonreis.domain.Usuario;
 import com.evertonreis.enums.RequestStage;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +18,8 @@ import java.util.List;
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
     public List<Request> findAllByUserId(Long id);
+
+    public Page<Request> findAllByUserId(Long id, Pageable pageable);
 
     @Transactional(readOnly = false)
     @Modifying

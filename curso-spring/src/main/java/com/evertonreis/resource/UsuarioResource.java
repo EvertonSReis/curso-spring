@@ -3,6 +3,8 @@ package com.evertonreis.resource;
 import com.evertonreis.domain.Request;
 import com.evertonreis.domain.Usuario;
 import com.evertonreis.dto.UserLoginDto;
+import com.evertonreis.model.PageModel;
+import com.evertonreis.model.PageRequestModel;
 import com.evertonreis.services.RequestService;
 import com.evertonreis.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +41,11 @@ public class UsuarioResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> listAll(){
-        List<Usuario> usuarios = service.listAll();
-        return ResponseEntity.ok(usuarios);
+    public ResponseEntity<PageModel<Usuario>> listAll(@RequestParam(value = "page") int page, @RequestParam(value = "size") int size){
+        PageRequestModel pr = new PageRequestModel(page, size);
+        PageModel pm = service.listAllOnLazyModel(pr);
+
+        return ResponseEntity.ok(pm);
     }
 
     @PostMapping("/login")
@@ -51,9 +55,10 @@ public class UsuarioResource {
     }
 
     @GetMapping("/{id}/requests")
-    public ResponseEntity<List<Request>> listAllRequestsById(@PathVariable(name = "id") Long id){
-        List<Request> obj = requestService.listAllByUserId(id);
-        return ResponseEntity.ok(obj);
+    public ResponseEntity<PageModel<Request>> listAllRequestsById(@PathVariable(name = "id") Long id, @RequestParam(value = "page") int page, @RequestParam(value = "size") int size){
+        PageRequestModel pr = new PageRequestModel(page, size);
+        PageModel<Request> pm = requestService.listAllByUserIdOnLazyModel(id, pr);
+        return ResponseEntity.ok(pm);
     }
 
     @DeleteMapping("/{id}")

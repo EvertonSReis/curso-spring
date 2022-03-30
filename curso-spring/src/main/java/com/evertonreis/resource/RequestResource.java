@@ -3,6 +3,8 @@ package com.evertonreis.resource;
 import com.evertonreis.domain.Request;
 import com.evertonreis.domain.Stage;
 import com.evertonreis.domain.Usuario;
+import com.evertonreis.model.PageModel;
+import com.evertonreis.model.PageRequestModel;
 import com.evertonreis.services.RequestService;
 import com.evertonreis.services.StageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,14 +44,17 @@ public class RequestResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<Request>> listByRequest(){
-        List<Request> obj = service.listByRequest();
-        return ResponseEntity.ok(obj);
+    public ResponseEntity<PageModel<Request>> listByRequest(@RequestParam(value = "page") int page, @RequestParam(value = "size") int size){
+        PageRequestModel pr = new PageRequestModel(page, size);
+        PageModel<Request> pm = service.listByRequestOnLazy(pr);
+        return ResponseEntity.ok(pm);
     }
 
     @GetMapping("/{id}/stages")
-    public ResponseEntity<List<Stage>> listAllStageById(@PathVariable(name = "id") Long id){
-        List<Stage> obj = stageService.listAllByStageId(id);
-        return ResponseEntity.ok(obj);
+    public ResponseEntity<PageModel<Stage>> listAllStageById(@PathVariable(name = "id") Long id, @RequestParam(value = "page") int page, @RequestParam(value = "size") int size){
+        PageRequestModel pr = new PageRequestModel(page, size);
+        PageModel<Stage> pm = stageService.listAllByStageIdOnLazyModel(id, pr);
+
+        return ResponseEntity.ok(pm);
     }
 }
