@@ -3,6 +3,7 @@ package com.evertonreis.resource;
 import com.evertonreis.domain.Request;
 import com.evertonreis.domain.Usuario;
 import com.evertonreis.dto.UserLoginDto;
+import com.evertonreis.dto.UsuarioUpdateRoledto;
 import com.evertonreis.model.PageModel;
 import com.evertonreis.model.PageRequestModel;
 import com.evertonreis.services.RequestService;
@@ -65,5 +66,16 @@ public class UsuarioResource {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable(name = "id") Long id){
         service.delete(id);
+    }
+
+    @PatchMapping("/role/{id}")
+    public ResponseEntity<?> updateRole(@PathVariable(name = "id") Long id, @RequestBody UsuarioUpdateRoledto usuariodto){
+        Usuario usuario = new Usuario();
+        usuario.setId(id);
+        usuario.setRole(usuariodto.getRole());
+
+        service.updateRole(usuario);
+
+        return ResponseEntity.ok().build();
     }
 }

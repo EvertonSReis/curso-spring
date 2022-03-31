@@ -66,4 +66,8 @@ public class UsuarioService {
     public void delete(Long id){
         repository.deleteById(id);
     }
+
+    public int updateRole(Usuario usuario){
+        return  repository.updateRole(usuario.getId(), usuario.getRole());
+    }
 }
