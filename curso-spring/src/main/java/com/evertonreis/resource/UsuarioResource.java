@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -50,7 +51,7 @@ public class UsuarioResource {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Usuario> login(@RequestBody UserLoginDto usuario){
+    public ResponseEntity<Usuario> login(@RequestBody @Valid UserLoginDto usuario){
         Usuario loggedUsuario = service.login(usuario.getEmail(), usuario.getSenha());
         return ResponseEntity.ok(loggedUsuario);
     }

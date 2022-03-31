@@ -55,10 +55,10 @@ public class UsuarioRepositoryTest {
 
     @Test
     public void loginTest(){
-        Optional<Usuario> result = repository.login("everton@gmail.com", "123");
+        Optional<Usuario> result = repository.login("lorenzo@gmail.com", "123456");
         Usuario logUsuario = result.get();
 
-        assertThat(logUsuario.getId()).isEqualTo(1L);
+        assertThat(logUsuario.getId()).isEqualTo(7L);
     }
 
     @Test
